@@ -8,3 +8,4 @@
 5. Repeat steps 3 and 4 for `chuckle_hotel_test` database
 
 
+test
