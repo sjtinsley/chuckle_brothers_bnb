@@ -11,11 +11,15 @@ class ChuckleHotel < Sinatra::Base
   end
 
   post '/spaces' do
-    $space = Space.create(name: params[:name], description: params[:description], price: params[:price])
+    # This needs to be changed once we have an 'all' method to avoid global variable
+    $space = Space.create(name: params[:name], description: params[:description], price: params[:price]) 
     redirect '/spaces/confirmation'
   end
 
-
+  get '/spaces/confirmation' do
+    @space = $space
+    erb :'spaces/confirmation'
+  end
 
   run! if app_file == $0
 end
