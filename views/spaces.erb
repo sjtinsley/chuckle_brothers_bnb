@@ -3,6 +3,8 @@
   <body>
     <h1>Available Spaces</h1>
 
-    <h2><%= @spaces %></h2>
+    <% @spaces.each do |space| %>
+     <h2><%= space.name %></h2>
+      <% end %>
   </body>
 </html>

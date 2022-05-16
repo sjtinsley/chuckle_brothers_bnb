@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
-require './lib/spaces'
+require './lib/space'
 
 class ChuckleHotel < Sinatra::Base
   configure :development do
@@ -8,15 +8,9 @@ class ChuckleHotel < Sinatra::Base
   end
 
   get '/spaces' do
-    @spaces = Spaces.all
+    @spaces = Space.all
     erb :spaces
   end
-
-  
-
-
-
-
 
   run! if app_file == $0
 end

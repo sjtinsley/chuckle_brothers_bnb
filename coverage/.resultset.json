@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/farzan/Desktop/Desktop/Makers/Week_5/ChuckleHotel/chuckle_brothers_bnb/spec/features/view_spaces_spec.rb": {
+      "/Users/georgedainton/Projects/makers/chuckle_brothers_bnb/spec/features/view_spaces_spec.rb": {
         "lines": [
           1,
           null,
@@ -14,39 +14,24 @@
           null
         ]
       },
-      "/Users/farzan/Desktop/Desktop/Makers/Week_5/ChuckleHotel/chuckle_brothers_bnb/spec/spaces_spec.rb": {
+      "/Users/georgedainton/Projects/makers/chuckle_brothers_bnb/spec/space_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
           1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/farzan/Desktop/Desktop/Makers/Week_5/ChuckleHotel/chuckle_brothers_bnb/lib/spaces.rb": {
-        "lines": [
-          1,
           null,
           1,
-          null,
-          null,
           1,
-          2,
-          2,
-          null,
-          0,
-          null,
-          null,
-          2,
-          8,
+          1,
+          1,
+          1,
           null,
           null
         ]
       }
     },
-    "timestamp": 1652715291
+    "timestamp": 1652718552
   }
 }
