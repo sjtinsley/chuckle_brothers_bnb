@@ -7,6 +7,11 @@ class ChuckleHotel < Sinatra::Base
     'Hello World'
   end
 
+  get '/spaces' do
+    @spaces = Space.all
+    erb :spaces
+  end
+  
   get '/spaces/new' do
     erb :'spaces/new'
   end
