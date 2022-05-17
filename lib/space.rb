@@ -8,7 +8,6 @@ class Space
     @name = name
     @description = description
     @price = price
-
   end
 
   def self.all
@@ -17,7 +16,7 @@ class Space
     else
       connection = PG.connect(dbname: 'chuckle_hotel')
     end
-    
+
     result = connection.exec("SELECT * FROM spaces;")
     result.map do |space|
       Space.new(id: space['id'], name: space['name'], description: space['description'], price: space['price'])
