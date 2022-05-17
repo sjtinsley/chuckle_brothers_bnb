@@ -16,16 +16,21 @@ class ChuckleHotel < Sinatra::Base
     erb :'spaces/new'
   end
 
-  post '/spaces' do
-    # This needs to be changed once we have an 'all' method to avoid global variable
-    Space.create(name: params[:name], description: params[:description], price: params[:price]) 
-    redirect '/spaces/confirmation'
-  end
-
   get '/spaces/confirmation' do
     @space = Space.all.last
     erb :'spaces/confirmation'
   end
+
+  post '/spaces' do
+    Space.create(name: params[:name], description: params[:description], price: params[:price]) 
+    redirect '/spaces/confirmation'
+  end
+
+  get '/spaces/:id' do 
+    @space = Space.find(id: params[:id])
+    erb :'spaces/space'
+  end 
+
 
   run! if app_file == $0
 end
