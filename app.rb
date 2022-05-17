@@ -13,12 +13,12 @@ class ChuckleHotel < Sinatra::Base
 
   post '/spaces' do
     # This needs to be changed once we have an 'all' method to avoid global variable
-    $space = Space.create(name: params[:name], description: params[:description], price: params[:price]) 
+    Space.create(name: params[:name], description: params[:description], price: params[:price]) 
     redirect '/spaces/confirmation'
   end
 
   get '/spaces/confirmation' do
-    @space = $space
+    @space = Space.all.last
     erb :'spaces/confirmation'
   end
 
