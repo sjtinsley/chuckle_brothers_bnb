@@ -33,9 +33,15 @@ class ChuckleHotel < Sinatra::Base
   end 
 
   post '/booking' do
-    BookingRequest.create(date: params[:date], space_id: params[:space_id])
-    redirect '/booking/confirmation'
+    booking_request = BookingRequest.create(date: params[:date], space_id: params[:space_id])
+    redirect "/booking/#{booking_request.id}/confirmation"
   end
+
+  get '/booking/:id/confirmation' do
+    booking_request = BookingRequest.find(id: params[:id])
+    @space = Space.find(id: booking_request.space_id)
+    erb :'booking/confirmation'
+  end 
 
 
   run! if app_file == $0
