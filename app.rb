@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require_relative './lib/space'
+require_relative './lib/user'
 
 class ChuckleHotel < Sinatra::Base
 
@@ -17,7 +18,6 @@ class ChuckleHotel < Sinatra::Base
   end
 
   post '/spaces' do
-    # This needs to be changed once we have an 'all' method to avoid global variable
     Space.create(name: params[:name], description: params[:description], price: params[:price]) 
     redirect '/spaces/confirmation'
   end
@@ -26,6 +26,21 @@ class ChuckleHotel < Sinatra::Base
     @space = Space.all.last
     erb :'spaces/confirmation'
   end
+
+  get '/users/new' do
+    erb :'users/new'
+  end
+  
+  post '/users' do
+    User.create(username: params[:username], email: params[:email], password: params[:password]) 
+    redirect '/users/confirmation'
+  end
+
+  get '/users/confirmation' do
+    @user = User.all.last
+    erb :'users/confirmation'
+  end
+
 
   run! if app_file == $0
 end
