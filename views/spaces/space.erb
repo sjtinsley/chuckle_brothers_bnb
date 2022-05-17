@@ -1,6 +1,6 @@
-<%= @space.name %>
-<%= @space.description %>
-<%= @space.price %>
+<h1><%= @space.name %></h1>
+<h2><%= @space.description %></h2>
+<h3><%= @space.price %></h3>
 
 <form method="post" action="/booking">
   <input type="hidden" name="space_id" value="<%= @space.id %>">
