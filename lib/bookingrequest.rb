@@ -24,4 +24,21 @@ class BookingRequest
       date: result[0]['date'],
     )
   end
+
+  def self.find(id:)
+    if ENV['RACK_ENV'] == 'test'
+      connection = PG.connect(dbname: 'chuckle_hotel_test')
+    else
+      connection = PG.connect(dbname: 'chuckle_hotel')
+    end
+
+    result = connection.exec_params("SELECT * FROM booking_requests WHERE id = $1;",
+    [id])
+
+    BookingRequest.new(
+      id: result[0]['id'],
+      space_id: result[0]['space_id'],
+      date: result[0]['date'],
+    )
+  end
 end
