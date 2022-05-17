@@ -14,18 +14,9 @@ class User
   def self.create(username:, email:, password:)
    
     encrypted_pass = BCrypt::Password.create(password)
-    
-    # p password
-    # p encrypted_pass
 
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'chuckle_hotel_test')
-    else
-      connection = PG.connect(dbname: 'chuckle_hotel')
-    end
-
-    result = connection.exec_params("INSERT INTO users (username, email, password)
-    VALUES($1, $2, $3) returning id, username, email, password;",
+    result = DatabaseConnection.setup.query("INSERT INTO users (username, email, password)
+    VALUES($1, $2, $3) returning id, username, email, password;", 
     [username, email, encrypted_pass])
 
     User.new(
@@ -37,13 +28,7 @@ class User
   end
 
   def self.all
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'chuckle_hotel_test')
-    else
-      connection = PG.connect(dbname: 'chuckle_hotel')
-    end
-
-    result = connection.exec("SELECT * FROM users;")
+    result = DatabaseConnection.setup.query("SELECT * FROM users;")
     result.map do |user|
       User.new(id: user['id'], username: user['username'], email: user['email'], pass_hash:user['password'])
     end
