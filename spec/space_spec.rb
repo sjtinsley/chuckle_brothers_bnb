@@ -22,4 +22,18 @@ describe Space do
       expect(spaces.first.price).to eq "1"
     end
   end
+
+  describe '.find' do
+    it "selects specific space by id" do
+      space = Space.create(name: 'Space1', description: 'description1', price: 1)
+      found_space = Space.find(id: space.id)
+      
+      expect(found_space.id).to eq(space.id)
+      expect(found_space.name).to eq(space.name)
+      expect(found_space.description).to eq(space.description)
+      expect(found_space.price).to eq(space.price)
+    end
+  end 
+
+
 end

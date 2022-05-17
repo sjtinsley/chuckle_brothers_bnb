@@ -40,6 +40,15 @@ class ChuckleHotel < Sinatra::Base
     @user = User.all.last
     erb :'users/confirmation'
   end
+  post '/spaces' do
+    Space.create(name: params[:name], description: params[:description], price: params[:price]) 
+    redirect '/spaces/confirmation'
+  end
+
+  get '/spaces/:id' do 
+    @space = Space.find(id: params[:id])
+    erb :'spaces/space'
+  end 
 
 
   run! if app_file == $0
