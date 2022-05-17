@@ -1,5 +1,3 @@
-require 'capybara/rspec'
-
 feature "view spaces" do
   scenario "user can see the available spaces" do
     Space.create(name: 'name', description: 'description', price: 4)
