@@ -28,10 +28,8 @@ describe Space do
       space = Space.create(name: 'Space1', description: 'description1', price: 1)
       found_space = Space.find(id: space.id)
       
-      expect(found_space.id).to eq(space.id)
-      expect(found_space.name).to eq(space.name)
-      expect(found_space.description).to eq(space.description)
-      expect(found_space.price).to eq(space.price)
+
+      expect(found_space).to be_an_instance_of(Space).and have_attributes(name: 'Space1', description: 'description1', price: 1)
     end
   end 
 

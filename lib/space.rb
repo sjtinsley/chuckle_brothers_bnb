@@ -12,26 +12,15 @@ class Space
   end
 
   def self.all
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'chuckle_hotel_test')
-    else
-      connection = PG.connect(dbname: 'chuckle_hotel')
-    end
+    result = DatabaseConnection.setup.query("SELECT * FROM spaces;")
     
-    result = connection.exec("SELECT * FROM spaces;")
     result.map do |space|
       Space.new(id: space['id'], name: space['name'], description: space['description'], price: space['price'])
     end 
   end
 
-  def self.create(name:, description:, price:)
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'chuckle_hotel_test')
-    else
-      connection = PG.connect(dbname: 'chuckle_hotel')
-    end
-     
-    result = connection.exec_params("INSERT INTO spaces (name, description, price)
+  def self.create(name:, description:, price:)  
+    result = DatabaseConnection.setup.query("INSERT INTO spaces (name, description, price)
       VALUES($1, $2, $3) returning id, name, description, price;",
       [name, description, price])
 
@@ -44,13 +33,7 @@ class Space
   end
 
   def self.find(id:)
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'chuckle_hotel_test')
-    else
-      connection = PG.connect(dbname: 'chuckle_hotel')
-    end
-
-    result = connection.exec_params("SELECT * FROM spaces WHERE id = $1;",
+    result = DatabaseConnection.setup.query("SELECT * FROM spaces WHERE id = $1;",
     [id])
     
     Space.new(
