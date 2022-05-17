@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require_relative './lib/space'
 require_relative './lib/user'
+require_relative './lib/bookingrequest'
 
 class ChuckleHotel < Sinatra::Base
 
@@ -49,6 +50,11 @@ class ChuckleHotel < Sinatra::Base
     @space = Space.find(id: params[:id])
     erb :'spaces/space'
   end 
+
+  post '/booking' do
+    BookingRequest.create(date: params[:date], space_id: params[:space_id])
+    redirect '/booking/confirmation'
+  end
 
 
   run! if app_file == $0
