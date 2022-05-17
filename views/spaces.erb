@@ -3,7 +3,7 @@
   <body>
     <h1>Available Spaces</h1>
     <% @spaces.each do |space| %>
-    <a href="/spaces/<%= space.id %>">
+    <a class="space" href="/spaces/<%= space.id %>">
     <h2><%= space.name %></h2>
     </a>
       <% end %>
