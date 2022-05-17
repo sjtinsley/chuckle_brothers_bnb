@@ -1,4 +1,4 @@
-ENV['ENVIRONMENT'] = 'test'
+ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
@@ -11,11 +11,10 @@ require 'simplecov-console'
 
 Capybara.app = ChuckleHotel
 
-# RSpec.configure do |config|
-#   config.before(:each) do
-#     setup_test_database
-#   end
-# end
+def empty_test_db
+  connection = PG.connect(dbname: 'chuckle_hotel_test')
+  connection.exec("TRUNCATE TABLE spaces;")
+end
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,

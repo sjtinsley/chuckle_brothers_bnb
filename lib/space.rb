@@ -12,14 +12,14 @@ class Space
   end
 
   def self.all
-    if ENV['ENVIRONMENT'] == 'test'
-      con = PG.connect(dbname: 'chuckle_hotel_test')
+    if ENV['RACK_ENV'] == 'test'
+      connection = PG.connect(dbname: 'chuckle_hotel_test')
     else
-      con = PG.connect(dbname: 'chuckle_hotel')
+      connection = PG.connect(dbname: 'chuckle_hotel')
     end
 
-    res = con.exec("SELECT * FROM spaces;")
-    res.map do |space|
+    result = connection.exec("SELECT * FROM spaces;")
+    result.map do |space|
       Space.new(id: space['id'], name: space['name'], description: space['description'], price: space['price'])
     end 
   end
