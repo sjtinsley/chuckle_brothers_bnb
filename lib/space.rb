@@ -31,13 +31,7 @@ class Space
   end
 
   def self.find(id:)
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'chuckle_hotel_test')
-    else
-      connection = PG.connect(dbname: 'chuckle_hotel')
-    end
-
-    result = connection.exec_params("SELECT * FROM spaces WHERE id = $1;",
+    result = DatabaseConnection.setup.query("SELECT * FROM spaces WHERE id = $1;",
     [id])
     
     Space.new(
