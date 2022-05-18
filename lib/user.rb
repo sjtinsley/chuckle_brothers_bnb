@@ -30,8 +30,22 @@ class User
   def self.all
     result = DatabaseConnection.setup.query("SELECT * FROM users;")
     result.map do |user|
-      User.new(id: user['id'], username: user['username'], email: user['email'], pass_hash:user['password'])
+      User.new(id: user['id'], username: user['username'], email: user['email'], pass_hash: user['password'])
     end
   end
   
+  def self.authenticate(email:, password:)
+    result = DatabaseConnection.setup.query("SELECT * FROM users WHERE email = $1;",
+    [email])
+
+    return unless result.any?
+    return unless BCrypt::Password.new(result[0]['password']) == password
+    User.new(id: result[0]['id'], email: result[0]['email'], username: result[0]['username'], pass_hash: result[0]['pass_hash'])
+  end
+
+
+
+
+
+
 end

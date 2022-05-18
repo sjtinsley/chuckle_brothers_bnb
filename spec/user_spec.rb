@@ -22,4 +22,14 @@ describe User do
       expect(user.first).to be_an_instance_of(User).and have_attributes(username: 'test', email: 'test@email.com')
     end
   end
-end
+
+
+  describe '.authenticate' do
+    it 'checks email and password are correct and returns user' do
+      user = User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")
+      authenticated_user = User.authenticate(email: 'test@email.com', password: "bobbychuckle")
+
+      expect(authenticated_user.id).to eq user.id
+    end 
+  end
+end 

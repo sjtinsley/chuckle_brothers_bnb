@@ -2,6 +2,7 @@ require 'sinatra/base'
 require_relative './lib/space'
 require_relative './lib/user'
 require_relative './lib/bookingrequest'
+require_relative './lib/database_connection'
 
 class ChuckleHotel < Sinatra::Base
 
@@ -10,6 +11,7 @@ class ChuckleHotel < Sinatra::Base
   end
 
   get '/spaces' do
+    @user = session[:user_id]
     @spaces = Space.all
     erb :spaces
   end
@@ -60,6 +62,21 @@ class ChuckleHotel < Sinatra::Base
     booking_request = BookingRequest.find(id: params[:id])
     @space = Space.find(id: booking_request.space_id)
     erb :'booking/confirmation'
+  end
+  
+  get '/sessions/new' do
+    erb :'sessions/new'
+  end 
+
+  post 'sessions/new' do 
+    user = User.authenticate(email: params[:email], password: params[:password])
+    if user
+      session[:user_id] = user.id
+    else
+      flash[:notice] = 'Email or password incorrect'
+      redirect '/sessions/new'
+    end
+    redirect '/spaces'
   end 
 
 
