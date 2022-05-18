@@ -1,19 +1,27 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require_relative './lib/space'
 require_relative './lib/user'
 require_relative './lib/bookingrequest'
 require_relative './lib/database_connection'
 
 class ChuckleHotel < Sinatra::Base
+  enable :sessions
+  register Sinatra::Flash
 
   get '/' do
     'Hello World'
   end
 
   get '/spaces' do
-    @user = session[:user_id]
-    @spaces = Space.all
-    erb :spaces
+    if session[:user_id]
+      @user = User.find(id: session[:user_id])
+      @spaces = Space.all
+      erb :'spaces/index'
+    else
+      @spaces = Space.all
+      erb :'spaces/index'
+    end
   end
   
   get '/spaces/new' do
@@ -68,15 +76,15 @@ class ChuckleHotel < Sinatra::Base
     erb :'sessions/new'
   end 
 
-  post 'sessions/new' do 
+  post '/sessions' do 
     user = User.authenticate(email: params[:email], password: params[:password])
     if user
       session[:user_id] = user.id
+      redirect '/spaces'
     else
       flash[:notice] = 'Email or password incorrect'
       redirect '/sessions/new'
     end
-    redirect '/spaces'
   end 
 
 
