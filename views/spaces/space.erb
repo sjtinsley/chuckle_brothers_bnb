@@ -1,9 +1,29 @@
-<h1><%= @space.name %></h1>
-<h2><%= @space.description %></h2>
-<h3><%= @space.price %></h3>
+<!DOCTYPE html>
+<html>
 
-<form method="post" action="/booking">
-  <input type="hidden" name="space_id" value="<%= @space.id %>">
-  <input type="date" name="date">
-  <input type="submit" value="Request Booking">
-</form>
+  <head>
+    <title><%= @space.name %></title>
+    <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
+  </head>
+
+  <div> 
+    <img src="../images/chucklehotel.png"/> 
+  </div>
+
+  <body>
+
+    <h1><%= @space.name %></h1>
+
+    <h2><%= @space.description %></h2>
+    
+    <h3><%= @space.price %></h3>
+
+    <form method="post" action="/booking">
+      <input type="hidden" name="space_id" value="<%= @space.id %>">
+      <input type="date" name="date">
+      <input type="submit" value="Request Booking">
+    </form>
+
+  </body>
+
+</html>

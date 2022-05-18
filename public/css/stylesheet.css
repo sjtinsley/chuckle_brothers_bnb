@@ -1,0 +1,25 @@
+body {
+  background-color: rgb(156, 224, 255);
+}
+
+h1 {
+  text-align: center;
+  text-decoration: underline;
+  font-family: Copperplate;
+  color: rgb(249, 0, 0);
+}
+
+.space {
+  text-align: center;
+  width: 10px;
+  height: 10px;
+  font-family: Copperplate;
+  color: rgb(0, 46, 249);
+
+}
+
+* {
+  border: 1px solid red;
+}
+
+/* wrap the names in a container? (a) */

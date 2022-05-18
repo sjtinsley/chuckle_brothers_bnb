@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
+
+  <head>
+    <title>Welcome to Chuckle Hotel</title>
+    <link rel="stylesheet" href="./css/stylesheet.css" type="text/css" />
+  </head>
+
   <body>
+  
+    <div> 
+        <img src="./images/chucklehotel.png"/> 
+    </div>
+
     <h1>Available Spaces</h1>
-    <% @spaces.each do |space| %>
-    <a class="space" href="/spaces/<%= space.id %>">
-    <h2><%= space.name %></h2>
-    </a>
+
+      <% @spaces.each do |space| %>
+        <a class="space" href="/spaces/<%= space.id %>">
+          <h2><%= space.name %></h2>
+        </a>
       <% end %>
+
   </body>
+
 </html>

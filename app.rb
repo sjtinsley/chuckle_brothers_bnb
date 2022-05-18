@@ -2,6 +2,8 @@ require 'sinatra/base'
 require_relative './lib/space'
 require_relative './lib/user'
 require_relative './lib/bookingrequest'
+require_relative './lib/database_connection'
+
 
 class ChuckleHotel < Sinatra::Base
 

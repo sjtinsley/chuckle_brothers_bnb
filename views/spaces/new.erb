@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <title>Hello!</title>
-    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+    <title>Hello! Add your space</title>
+    <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
   </head>
+
+  <div> 
+    <img src="../images/chucklehotel.png"/> 
+  </div>
+
   <body>
+
+  <h1>Please add your space's details below:</h1>
+
     <form action='/spaces' method='post'>
       <input type='text' name='name' placeholder='Space name' required>
       <input type='text' name='description' placeholder='Space description' required>
       <input type='number' name='price' placeholder='Space cost per night' required>
       <input type='submit' name='Create Space'>
     </form>
+
   </body>
+
 </html>
