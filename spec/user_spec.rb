@@ -6,9 +6,13 @@ describe User do
       expect(User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")).to be_an_instance_of(User).and have_attributes(username: 'test', email: 'test@email.com')
     end
 
-    it 'hashes the password using BCrypt' do
-      a = User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")
-      expect(a.pass_hash.length).to eq 60
+    xit 'hashes the password using BCrypt' do
+      expect(BCrypt::Password).to receive(:create).with('password123')
+
+      User.create(username: 'test', email: 'test@example.com', password: 'password123')
+
+      # a = User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")
+      # expect(a.length).to eq 60
     end
 
   end
@@ -32,4 +36,14 @@ describe User do
       expect(authenticated_user.id).to eq user.id
     end 
   end
+
+  describe '.find' do
+    it "selects specific user by id" do
+      user = User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")
+      found_user = User.find(id: user.id)
+      
+
+      expect(found_user).to be_an_instance_of(User).and have_attributes(username: 'test', email: 'test@email.com')
+    end
+  end 
 end 

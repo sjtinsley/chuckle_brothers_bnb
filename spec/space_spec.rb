@@ -38,5 +38,9 @@ describe Space do
     end
   end 
 
+  # describe '.find_by_user_id' do
+    
+  # end
+
 
 end
