@@ -19,11 +19,12 @@ class ChuckleHotel < Sinatra::Base
   end
   
   get '/spaces/new' do
+    @user = User.find(id: session[:user_id])
     erb :'spaces/new'
   end
 
   post '/spaces' do
-    Space.create(name: params[:name], description: params[:description], price: params[:price]) 
+    Space.create(name: params[:name], description: params[:description], price: params[:price], user_id: params[:user_id]) 
     redirect '/spaces/confirmation'
   end
 
