@@ -29,7 +29,7 @@ describe Space do
       found_space = Space.find(id: space.id)
       
 
-      expect(found_space).to be_an_instance_of(Space).and have_attributes(name: 'Space1', description: 'description1', price: 1)
+      expect(found_space).to be_an_instance_of(Space).and have_attributes(name: 'Space1', description: 'description1', price: '1')
     end
   end 
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Chuckle Hotel</h1>
+
+    <form action='/sessions/destroy' method='post'>
+      <input type='submit' value='Log Out'>
+    </form>
+
+    <% if session[:user_id] %>
+      <h3>Welcome <%= User.find(id: session[:user_id]).username %> </h3>
+    <% end %>
+
+    <% @spaces.each do |space| %>
+      <a class="space" href="/spaces/<%= space.id %>">
+        <h2><%= space.name %></h2>
+      </a>
+    <% end %>
+
+  </body>
+</html>

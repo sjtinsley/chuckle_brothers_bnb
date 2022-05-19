@@ -1,17 +1,21 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require_relative './lib/space'
 require_relative './lib/user'
 require_relative './lib/bookingrequest'
+require_relative './lib/database_connection'
 
 class ChuckleHotel < Sinatra::Base
+  enable :sessions
+  register Sinatra::Flash
 
   get '/' do
-    'Hello World'
+    erb :index
   end
 
   get '/spaces' do
     @spaces = Space.all
-    erb :spaces
+    erb :'spaces/index'
   end
   
   get '/spaces/new' do
@@ -60,7 +64,28 @@ class ChuckleHotel < Sinatra::Base
     booking_request = BookingRequest.find(id: params[:id])
     @space = Space.find(id: booking_request.space_id)
     erb :'booking/confirmation'
+  end
+  
+  get '/sessions/new' do
+    erb :'sessions/new'
   end 
+
+  post '/sessions' do 
+    user = User.authenticate(email: params[:email], password: params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect '/spaces'
+    else
+      flash[:notice] = 'Email or password incorrect'
+      redirect '/sessions/new'
+    end
+  end 
+
+  post '/sessions/destroy' do
+    session.clear
+    flash[:notice] = 'You have logged out successfully'
+    redirect '/'
+  end
 
 
   run! if app_file == $0

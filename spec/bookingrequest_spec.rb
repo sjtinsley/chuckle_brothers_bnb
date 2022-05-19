@@ -7,10 +7,10 @@ describe BookingRequest do
 
   describe '.find' do
     it "selects specific booking request by id" do
-      booking_request = BookingRequest.create(space_id: 1, date: '2022-05-17')
+      booking_request = BookingRequest.create(space_id: '1', date: '2022-05-17')
       found_booking_request = BookingRequest.find(id: booking_request.id)
       
-      expect(booking_request).to be_an_instance_of(BookingRequest).and have_attributes(space_id: 1, date: '2022-05-17')
+      expect(booking_request).to be_an_instance_of(BookingRequest).and have_attributes(space_id: '1', date: '2022-05-17')
     end
   end
 end
