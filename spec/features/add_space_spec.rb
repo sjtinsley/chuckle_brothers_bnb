@@ -1,5 +1,10 @@
 feature 'add space' do
   scenario 'user can create a space' do
+    user = User.create(username: 'test', email: 'test@email.com', password: 'bobbychuckle')
+    visit 'sessions/new'
+    fill_in 'email', with: 'test@email.com'
+    fill_in 'password', with: 'bobbychuckle'
+    click_button 'Log In'
     visit '/spaces/new'
     fill_in 'name', with: 'Testname'
     fill_in 'description', with: 'Testdescription'

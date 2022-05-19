@@ -4,6 +4,7 @@
 
 <form method="post" action="/booking">
   <input type="hidden" name="space_id" value="<%= @space.id %>">
+  <input type="hidden" name="user_id" value="<%= @space.user_id %>">
   <input type="date" name="date">
   <input type="submit" value="Request Booking">
 </form>
