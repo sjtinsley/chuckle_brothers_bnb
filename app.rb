@@ -38,7 +38,8 @@ class ChuckleHotel < Sinatra::Base
   end
   
   post '/users' do
-    User.create(username: params[:username], email: params[:email], password: params[:password]) 
+    user = User.create(username: params[:username], email: params[:email], password: params[:password]) 
+    session[:user_id] = user.id
     redirect '/users/confirmation'
   end
 
@@ -46,6 +47,7 @@ class ChuckleHotel < Sinatra::Base
     @user = User.all.last
     erb :'users/confirmation'
   end
+  
   post '/spaces' do
     Space.create(name: params[:name], description: params[:description], price: params[:price]) 
     redirect '/spaces/confirmation'
@@ -57,7 +59,7 @@ class ChuckleHotel < Sinatra::Base
   end 
 
   post '/booking' do
-    booking_request = BookingRequest.create(date: params[:date], space_id: params[:space_id])
+    booking_request = BookingRequest.create(date: params[:date], space_id: params[:space_id], guest_id: session[:user_id])
     redirect "/booking/#{booking_request.id}/confirmation"
   end
 
@@ -92,6 +94,9 @@ class ChuckleHotel < Sinatra::Base
   #   erb :'host/spaces'
   # end
 
+  get '/host/spaces' do
+    erb :'host/index'
+  end
 
   run! if app_file == $0
 end
