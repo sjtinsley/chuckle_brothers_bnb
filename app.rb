@@ -24,7 +24,9 @@ class ChuckleHotel < Sinatra::Base
   end
 
   post '/spaces' do
-    Space.create(name: params[:name], description: params[:description], price: params[:price], user_id: params[:user_id]) 
+    Space.create(name: params[:name], description: params[:description], 
+      price: params[:price], user_id: params[:user_id], available_from: params[:available_from], 
+      available_to: params[:available_to]) 
     redirect '/spaces/confirmation'
   end
 
@@ -91,7 +93,6 @@ class ChuckleHotel < Sinatra::Base
   # get '/host/spaces' do
   #   erb :'host/spaces'
   # end
-
 
   run! if app_file == $0
 end

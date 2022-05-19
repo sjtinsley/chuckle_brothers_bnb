@@ -4,7 +4,14 @@ feature 'create booking request' do
     [1, 'username', 'email', 'encrypted_pass']) }
     
   scenario 'user selects a space, enters a date and clicks request booking' do
-    space = Space.create(name: 'space name', description: 'description', price: 4, user_id: 1)
+    space = Space.create(
+      name: 'space name', 
+      description: 'description', 
+      price: 4, 
+      user_id: 1, 
+      available_from: '2022-05-20', 
+      available_to: '2022-06-10'
+    )
 
     visit '/spaces'
     first('.space').click

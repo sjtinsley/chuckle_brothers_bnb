@@ -6,14 +6,11 @@ describe User do
       expect(User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")).to be_an_instance_of(User).and have_attributes(username: 'test', email: 'test@email.com')
     end
 
-    xit 'hashes the password using BCrypt' do
-      expect(BCrypt::Password).to receive(:create).with('password123')
+    # it 'hashes the password using BCrypt' do
+    #   expect(BCrypt::Password).to receive(:create).with('password123')
 
-      User.create(username: 'test', email: 'test@example.com', password: 'password123')
-
-      # a = User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")
-      # expect(a.length).to eq 60
-    end
+    #   User.create(username: 'test', email: 'test@example.com', password: 'password123')
+    # end
 
   end
 
