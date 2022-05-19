@@ -6,6 +6,7 @@ feature 'add space' do
     fill_in 'password', with: 'bobbychuckle'
     click_button 'Log In'
     visit '/spaces/new'
+  
     fill_in 'name', with: 'Testname'
     fill_in 'description', with: 'Testdescription'
     fill_in 'price', with: 4

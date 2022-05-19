@@ -17,6 +17,7 @@ class ChuckleHotel < Sinatra::Base
   end
   
   get '/spaces/new' do
+    @user = User.find(id: session[:user_id])
     erb :'spaces/new'
   end
 
