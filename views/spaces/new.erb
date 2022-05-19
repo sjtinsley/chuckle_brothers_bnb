@@ -5,10 +5,18 @@
     <link rel="stylesheet" href="stylesheet.css" type="text/css" />
   </head>
   <body>
+    <h1>Chuckle Hotel</h1>
+
     <form action='/spaces' method='post'>
-      <input type='text' name='name' placeholder='Space name' required>
-      <input type='text' name='description' placeholder='Space description' required>
-      <input type='number' name='price' placeholder='Space cost per night' required>
+      <input type='text' name='name' placeholder='Space name' required><br>
+      <input type='text' name='description' placeholder='Space description' required><br>
+      <input type='number' name='price' placeholder='Space cost per night' required><br>
+
+      <label for="available_from">Available from:</label><br>
+      <input type='date' name='available_from' required><br>
+      <label for="available_to">Available to:</label><br>
+      <input type='date' name=available_to required><br>
+
       <input type='submit' name='Create Space'>
     </form>
   </body>

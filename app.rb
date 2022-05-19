@@ -87,6 +87,10 @@ class ChuckleHotel < Sinatra::Base
     redirect '/'
   end
 
+  # get '/host/spaces' do
+  #   erb :'host/spaces'
+  # end
+
 
   run! if app_file == $0
 end

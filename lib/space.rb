@@ -41,4 +41,5 @@ class Space
       price: result[0]['price']
     )
   end 
+
 end
