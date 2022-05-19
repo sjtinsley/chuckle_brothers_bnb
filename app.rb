@@ -10,18 +10,12 @@ class ChuckleHotel < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    'Hello World'
+    erb :index
   end
 
   get '/spaces' do
-    if session[:user_id]
-      @user = User.find(id: session[:user_id])
-      @spaces = Space.all
-      erb :'spaces/index'
-    else
-      @spaces = Space.all
-      erb :'spaces/index'
-    end
+    @spaces = Space.all
+    erb :'spaces/index'
   end
   
   get '/spaces/new' do
@@ -86,6 +80,12 @@ class ChuckleHotel < Sinatra::Base
       redirect '/sessions/new'
     end
   end 
+
+  post '/sessions/destroy' do
+    session.clear
+    flash[:notice] = 'You have logged out successfully'
+    redirect '/'
+  end
 
 
   run! if app_file == $0

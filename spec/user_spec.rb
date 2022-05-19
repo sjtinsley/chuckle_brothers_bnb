@@ -7,8 +7,12 @@ describe User do
     end
 
     xit 'hashes the password using BCrypt' do
-      a = User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")
-      expect(a.pass_hash.length).to eq 60
+      expect(BCrypt::Password).to receive(:create).with('password123')
+
+      User.create(username: 'test', email: 'test@example.com', password: 'password123')
+
+      # a = User.create(username: 'test', email: 'test@email.com', password: "bobbychuckle")
+      # expect(a.length).to eq 60
     end
 
   end
