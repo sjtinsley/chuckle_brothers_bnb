@@ -16,6 +16,21 @@ describe Space do
         available_to: '2022-06-10'
         )).to be_an_instance_of(Space).and have_attributes(name: 'name', description: 'description', price: '4', user_id: '1')
     end
+
+    it 'should enter all the available dates in the range to the available dates database' do
+      Space.create(
+        name: 'name', 
+        description: 'description', 
+        price: 4, 
+        user_id: 1, 
+        available_from: '2022-05-20', 
+        available_to: '2022-05-29'
+        )
+        
+      num_available_dates = DatabaseConnection.setup.query("SELECT COUNT (id) FROM available_dates")
+
+      expect(num_available_dates[0]['count']).to eq '10'
+    end
   end
 
   describe '.all' do

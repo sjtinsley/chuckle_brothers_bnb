@@ -3,17 +3,21 @@
   <h1>Chuckle Hotel</h1>
 
     <form action='/host/spaces' method='post'>
-      <input type='text' name='name' placeholder='Space name' required><br>
-      <input type='text' name='description' placeholder='Space description' required><br>
-      <input type='number' name='price' placeholder='Space cost per night' required><br>
-      <input type='hidden' name='user_id' value="<%= @user.id %>">
-      
+
+      <select id="spaces" name="spaces">
+        <% @spaces.each do |space| %>
+          <option value="<%= space.id %>"><%= space.name %></option>
+        <% end %>
+      </select>
+
+      <br>
+
       <label for="available_from">Available from:</label><br>
       <input type='date' name='available_from' required><br>
       <label for="available_to">Available to:</label><br>
       <input type='date' name='available_to' required><br>
 
-      <input type='submit' name='Create Space'>
+      <input type='submit' value='Update Availability'>
     </form>
 
 </html>

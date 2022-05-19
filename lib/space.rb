@@ -24,12 +24,16 @@ class Space
     VALUES($1, $2, $3, $4) returning id, name, description, price, user_id;",
     [name, description, price, user_id])
     
-    # start_date = Date.parse(available_from)
-    # end_date = Date.parse(available_to)
-    # dates = (start_date..end_date).to_a
-    
-    # DatabaseConnection.setup.query("INSERT INTO available_dates (space_id, date) VALUES($1, $2);", 
-    # [result[0]['id'], dates])
+    start_date = Date.parse(available_from)
+    end_date = Date.parse(available_to)
+    dates = (start_date..end_date).to_a
+
+    connection = DatabaseConnection.setup
+
+    dates.map do |date|
+      connection.query("INSERT INTO available_dates (space_id, date) VALUES($1, $2);", 
+    [result[0]['id'], date])
+    end
     
     Space.new(
       id: result[0]['id'],

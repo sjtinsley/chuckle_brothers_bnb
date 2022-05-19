@@ -90,7 +90,9 @@ class ChuckleHotel < Sinatra::Base
     redirect '/'
   end
 
+  # Request for updating availability spec
   # get '/host/spaces' do
+  #   @spaces = Space.all
   #   erb :'host/spaces'
   # end
 
