@@ -29,6 +29,10 @@ header {
   padding: 20px 10px;
 }
 
+h2.slogan {
+  font-style: italic;
+}
+
 header a {
   float: left;
   color: black;

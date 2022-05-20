@@ -19,8 +19,13 @@ class ChuckleHotel < Sinatra::Base
   end
   
   get '/spaces/new' do
-    @user = User.find(id: session[:user_id])
-    erb :'spaces/new'
+    if session[:user_id]
+      @user = User.find(id: session[:user_id])
+      erb :'spaces/new'
+    else
+      flash[:notice] = 'You must be logged in to create a space'
+      redirect '/'
+    end
   end
 
   post '/spaces' do
@@ -56,8 +61,13 @@ class ChuckleHotel < Sinatra::Base
   end
 
   get '/spaces/:id' do 
-    @space = Space.find(id: params[:id])
-    erb :'spaces/space'
+    if session[:user_id]
+      @space = Space.find(id: params[:id])
+      erb :'spaces/space'
+    else
+      flash[:notice] = 'You must be logged in to view a space'
+      redirect '/'
+    end
   end 
 
   post '/booking' do
@@ -97,6 +107,16 @@ class ChuckleHotel < Sinatra::Base
   #   @spaces = Space.all
   #   erb :'host/spaces'
   # end
+
+  get '/host' do
+    if session[:user_id]
+      erb :'host/index'
+    else
+      flash[:notice] = 'You must be logged in to be a host'
+      redirect '/'
+    end
+    
+  end
 
   run! if app_file == $0
 end

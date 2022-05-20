@@ -43,4 +43,8 @@ describe User do
       expect(found_user).to be_an_instance_of(User).and have_attributes(username: 'test', email: 'test@email.com')
     end
   end 
+
+  # describe do
+
+  # end
 end 
