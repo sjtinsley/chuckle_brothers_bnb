@@ -17,12 +17,21 @@ describe BookingRequest do
     end
   end
 
-  describe '.approve' do
-    xit 'responds to booking requests by approving them' do
-      booking_request = BookingRequest.create(space_id: '1', date: '2022-05-17', guest_id: 1)
-      booking_request.approve 
-
-      expect(booking_request.approved).to eq true
+  describe '#approve' do
+    it 'responds to booking requests by approving them' do
+      booking_request = BookingRequest.create(space_id: 1, date: '2022-05-17', guest_id: 1)
+      approved_booking_request = booking_request.approve(id: booking_request.id)
+      p booking_request.id
+      expect(approved_booking_request.approved).to eq 't'
     end
   end 
+
+  describe '#reject' do
+    it 'responds to booking requests by rejecting them' do
+      booking_request = BookingRequest.create(space_id: 1, date: '2022-05-17', guest_id: 1)
+      rejected_booking_request = booking_request.reject(id: booking_request.id) 
+
+      expect(rejected_booking_request.approved).to eq 'f'
+    end
+  end
 end

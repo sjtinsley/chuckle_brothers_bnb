@@ -35,4 +35,30 @@ class BookingRequest
       approved: result[0]['approved']
     )
   end
+
+  def approve(id:)
+    result = DatabaseConnection.setup.query("UPDATE booking_requests SET approved = true WHERE id = $1 RETURNING id, space_id, date, guest_id, approved;",
+    [id])
+
+    BookingRequest.new(
+      id: result[0]['id'],
+      space_id: result[0]['space_id'],
+      date: result[0]['date'],
+      guest_id: result[0]['guest_id'],
+      approved: result[0]['approved']
+    )
+  end
+
+  def reject(id:)
+    result = DatabaseConnection.setup.query("UPDATE booking_requests SET approved = false WHERE id = $1 RETURNING id, space_id, date, guest_id, approved;",
+    [id])
+
+    BookingRequest.new(
+      id: result[0]['id'],
+      space_id: result[0]['space_id'],
+      date: result[0]['date'],
+      guest_id: result[0]['guest_id'],
+      approved: result[0]['approved']
+    )
+  end
 end

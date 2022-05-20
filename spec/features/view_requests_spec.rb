@@ -6,7 +6,7 @@ feature 'Responding to booking requests' do
     booking = BookingRequest.create(space_id: 1, date: '2022-05-17', guest_id: guest.id)
   end
     
-  xscenario 'user can approve booking requests for their spaces' do
+  scenario 'user can approve booking requests for their spaces' do
     
     visit '/host/requests'
 
@@ -16,7 +16,7 @@ feature 'Responding to booking requests' do
   end
  
     
-  xscenario 'user can reject booking requests for their spaces' do
+  scenario 'user can reject booking requests for their spaces' do
     
     visit '/host/requests'
 
