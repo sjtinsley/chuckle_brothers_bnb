@@ -4,7 +4,7 @@ feature 'Responding to booking requests' do
       VALUES($1, $2, $3, $4);", 
       [1, 'host', 'host@email.com', 'encrypted_pass'])   
     guest = User.create(username: 'test2', email: 'test2@email.com', password: 'bobbychuckle')
-    space = Space.create(name: 'SpaceName', description: 'description', price: 4, user_id: 1)
+    space = Space.create(name: 'SpaceName', description: 'description', price: 4, user_id: 1, available_from: '2022-06-10', available_to: '2022-06-17')
     booking = BookingRequest.create(space_id: space.id, date: '2022-05-17', guest_id: guest.id)
   end
     

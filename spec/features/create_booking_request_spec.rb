@@ -4,11 +4,7 @@ feature 'create booking request' do
     [1, 'username1', 'user1@usermail.com', 'password1']) }
     
   scenario 'user selects a space, enters a date and clicks request booking' do
-    visit('/')
-    fill_in :username, with: 'username2'
-    fill_in :email, with: 'user2@usermail.com'
-    fill_in :password, with: 'password2'
-    click_button 'Submit'
+    page.set_rack_session(:user_id => '1')
     
    
     space = Space.create(

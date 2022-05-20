@@ -135,6 +135,7 @@ class ChuckleHotel < Sinatra::Base
   get '/host/rejected' do
     @space = Space.find(id: BookingRequest.find(id: session[:last_request]).space_id)
     erb :'host/rejected'
+  end
 
   get '/host' do
     if session[:user_id]
@@ -143,7 +144,6 @@ class ChuckleHotel < Sinatra::Base
       flash[:notice] = 'You must be logged in to be a host'
       redirect '/'
     end
-    
   end
 
   run! if app_file == $0

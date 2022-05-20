@@ -4,6 +4,7 @@ feature 'view a space' do
     [1, 'username', 'email', 'encrypted_pass']) }
 
   scenario 'user can view a selected space' do
+    page.set_rack_session(:user_id => '1')
     space = Space.create(
       name: 'name', 
       description: 'description', 
