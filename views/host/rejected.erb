@@ -2,9 +2,18 @@
 <html>
   <head>
     <title>Thank you for confirming the request!</title>
-    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+   <link rel="stylesheet" href="../../css/stylesheet.css" type="text/css" />
   </head>
   <body>
-  Thank you, you have rejected booking for <%= @space.name %>.
+
+    <header>
+      <a href="/spaces">
+        <img src="../../images/newlogo.png" class='logo'/>
+      </a>
+    </header>
+
+  <body>
+    <h1>Thank you, you have rejected booking for <%= @space.name %>.</h1>
   </body>
+
 </html>

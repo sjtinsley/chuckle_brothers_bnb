@@ -1,15 +1,5 @@
 * {box-sizing: border-box;}
 
-/* input[type="submit"] {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-} */
-
 body { 
   background-color: #d35ce8;
   margin: 0;
@@ -126,8 +116,6 @@ input {
 a.space {
   color: white;
 }
-
-
 
 .flash {
   background-color: #a90991;
