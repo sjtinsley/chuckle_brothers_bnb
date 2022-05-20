@@ -1,4 +1,8 @@
 feature 'add space' do
+  before(:each) { DatabaseConnection.setup.query("INSERT INTO users (id, username, email, password)
+    VALUES($1, $2, $3, $4);", 
+    [1, 'username', 'email', 'encrypted_pass']) }
+
   scenario 'user can create a space' do
     user = User.create(username: 'test', email: 'test@email.com', password: 'bobbychuckle')
     visit 'sessions/new'
@@ -12,12 +16,10 @@ feature 'add space' do
     fill_in 'price', with: 4
     fill_in 'available_from', with: '2022-05-25'
     fill_in 'available_to', with: '2022-06-10'
-    # page.fill_in :placeholder => 'available_from', with: '2022-05-25'
-    # page.fill_in :placeholder => 'available_to', with: '2022-06-10'
+
     click_button 'Create Space'
 
-    expect(page).to have_content 'Thank you for adding Testname to Chuckle Hotel'
+    expect(page).to have_content 'Thanks for adding Testname to Chuckle Hotel'
   end
-
 
 end

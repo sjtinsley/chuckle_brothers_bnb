@@ -19,12 +19,19 @@ class ChuckleHotel < Sinatra::Base
   end
   
   get '/spaces/new' do
-    @user = User.find(id: session[:user_id])
-    erb :'spaces/new'
+    if session[:user_id]
+      @user = User.find(id: session[:user_id])
+      erb :'spaces/new'
+    else
+      flash[:notice] = 'You must be logged in to create a space'
+      redirect '/'
+    end
   end
 
   post '/spaces' do
-    Space.create(name: params[:name], description: params[:description], price: params[:price], user_id: params[:user_id]) 
+    Space.create(name: params[:name], description: params[:description], 
+      price: params[:price], user_id: params[:user_id], available_from: params[:available_from], 
+      available_to: params[:available_to]) 
     redirect '/spaces/confirmation'
   end
 
@@ -40,7 +47,8 @@ class ChuckleHotel < Sinatra::Base
   post '/users' do
     user = User.create(username: params[:username], email: params[:email], password: params[:password]) 
     session[:user_id] = user.id
-    redirect '/users/confirmation'
+    flash[:notice] = 'Thanks for signing up to Chuckle Hotel'
+    redirect '/spaces'
   end
 
   get '/users/confirmation' do
@@ -54,9 +62,14 @@ class ChuckleHotel < Sinatra::Base
   end
 
   get '/spaces/:id' do 
-    @space = Space.find(id: params[:id])
-    @guest_id = session[:user_id]
-    erb :'spaces/space'
+    if session[:user_id]
+      @space = Space.find(id: params[:id])
+      @guest_id = session[:user_id]
+      erb :'spaces/space'
+    else
+      flash[:notice] = 'You must be logged in to view a space'
+      redirect '/'
+    end
   end 
 
   post '/booking' do
@@ -95,10 +108,7 @@ class ChuckleHotel < Sinatra::Base
     @booking_requests = BookingRequest.all_for_user(id: session[:user_id])
     erb :'host/requests'
   end
-
-  # get '/host/spaces' do
-  #   erb :'host/spaces'
-  # end
+  
 
   get '/host/spaces' do
     erb :'host/index'
@@ -125,6 +135,15 @@ class ChuckleHotel < Sinatra::Base
   get '/host/rejected' do
     @space = Space.find(id: BookingRequest.find(id: session[:last_request]).space_id)
     erb :'host/rejected'
+
+  get '/host' do
+    if session[:user_id]
+      erb :'host/index'
+    else
+      flash[:notice] = 'You must be logged in to be a host'
+      redirect '/'
+    end
+    
   end
 
   run! if app_file == $0

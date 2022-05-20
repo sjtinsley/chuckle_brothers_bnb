@@ -2,14 +2,40 @@
 <html>
   <head>
     <title>Sign Up</title>
-    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+    <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
   </head>
   <body>
-    <form action='/users' method='post'>
-      <input type='text' name='username' placeholder='User name' required>
-      <input type='text' name='email' placeholder='Email address' required>
-      <input type='password' name='password' placeholder='Password' required>
-      <input type='submit' name='Create Account'>
-    </form>
+    <header>
+
+      <a href="/">
+        <img src="../images/newlogo.png" class='logo'/> 
+      </a>
+
+      <div class="header-right">
+        <a href="/spaces">Spaces</a>
+        <a href="/host">Host</a>
+
+        <% if !session[:user_id] %>
+          <a class="active" href="/users/new">Sign up</a>
+          <a href="/sessions/new">Log in</a>
+        <% end %>
+        
+      </div>
+    </header>
+
+    <main>
+
+      <div class="center">
+        <h2>
+          Enter your details to sign up
+        </h2>
+        <form class="column" action='/users' method='post'>
+          <input type='text' name='username' placeholder='User name' required>
+          <input type='email' name='email' placeholder='Email address' required>
+          <input type='password' name='password' placeholder='Password' required>
+          <input type='submit' value='Create Account'>
+        </form>
+      <div>
+    </main>
   </body>
 </html>

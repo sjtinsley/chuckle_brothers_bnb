@@ -2,31 +2,41 @@
 <html>
   <head>
     <title>Chuckle Hotel</title>
-    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+    <link rel="stylesheet" href="./css/stylesheet.css" type="text/css" />
   </head>
   <body>
 
-    <h1>Chuckle Hotel</h1>
-    <h2>Stay for a good time, not a long time</h2>
 
-    <h3>
-      <%= flash[:notice] %>
-    </h3>
 
-    <h4>New here? Sign up below:</h4>
-    <form action='/users' method='post'>
-      <input type='text' name='username' placeholder='User name' required>
-      <input type='text' name='email' placeholder='Email address' required>
-      <input type='password' name='password' placeholder='Password' required>
-      <input type='submit' name='Submit'>
-    </form>
 
-    <br>
+    <div class='form'>
 
-    <h4>Already got an account? Sign in below:</h4>
-    <form action='/sessions/new' method='get'>
-      <input type='submit' value='Log In'>
-    </form>
+      <a href="/">
+        <img src="../images/newlogo.png"/> 
+      </a>
+
+      <h2 class='slogan'>Stay for a good time, not a long time</h2>
+
+      <% if flash[:notice]%>
+        <h3 class='flash'>
+          <%= flash[:notice] %>
+        </h3>
+      <% end %>
+
+      <h4>New here? Sign up below:</h4>
+      <form action='/users' method='post'>
+        <input type='text' name='username' placeholder='User name' required><br>
+        <input type='email' name='email' placeholder='Email address' required><br>
+        <input type='password' name='password' placeholder='Password' minlength='6' required><br>
+        <input type='submit' value='Create Account'>
+      </form>
+
+      <h4>Already got an account? Sign in below:</h4>
+      <form action='/sessions/new' method='get'>
+        <input type='submit' value='Log In'>
+      </form>
+
+    </div>
 
   </body>
 </html>

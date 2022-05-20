@@ -1,21 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <h1>Chuckle Hotel</h1>
 
-    <form action='/sessions/destroy' method='post'>
-      <input type='submit' value='Log Out'>
-    </form>
+  <head>
+    <title>View All Spaces</title>
+    <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
+  </head>
+
+  <body>
+
+    <header>
+
+      <a href="/">
+        <img src="../images/newlogo.png" class='logo'/> 
+      </a>
+
+      <div class="header-right">
+        <a class="active" href="/spaces">Spaces</a>
+        <a href="/host">Host</a>
+
+        <% if !session[:user_id] %>
+          <a href="/users/new">Sign up</a>
+          <a href="/sessions/new">Log in</a>
+        <% end %>
+        
+      </div>
+    </header>
+
+    
 
     <% if session[:user_id] %>
-      <h3>Welcome <%= User.find(id: session[:user_id]).username %> </h3>
+      <div class="user">
+        <div class="nav">
+          <h2>
+            Welcome <%= User.find(id: session[:user_id]).username %>, take a look at our available spaces
+          </h2>
+
+          <div>
+            <form action='/sessions/destroy' method='post'>
+                <input type='submit' value='Log Out'>
+            </form>
+          </div>
+        </div>
+      </div>
     <% end %>
 
-    <% @spaces.each do |space| %>
-      <a class="space" href="/spaces/<%= space.id %>">
-        <h2><%= space.name %></h2>
-      </a>
+    <% if flash[:notice] %>
+      <h3 class="flash"><%= flash[:notice] %></h3>
     <% end %>
+
+    <main>
+
+      <div class=''>
+        <% @spaces.each do |space| %>
+          <a class="space" href="/spaces/<%= space.id %>">
+            <h2><%= space.name %></h2>
+            <h3>£<%= space.price %></h3>
+          </a>
+        <% end %>
+      </div>
+
+    </main>
 
   </body>
+
 </html>
