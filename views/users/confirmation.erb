@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>Account Creation Confirmation</title>
     <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
   </head>
+
   <body>
 
     <header>
-      <a href="/spaces" class="logo">Chuckle Hotel</a>
+
+      <a href="/">
+        <img src="../images/newlogo.png" class='logo'/> 
+      </a>
 
       <div class="header-right">
         <a class="active" href="/spaces">Spaces</a>
@@ -19,6 +24,7 @@
         <% end %>
         
       </div>
+
     </header>
 
     <% if session[:user_id] %>
@@ -40,5 +46,7 @@
     <main>
       Thanks for signing up to Chuckle Hotel
     </main>
+
   </body>
+
 </html>

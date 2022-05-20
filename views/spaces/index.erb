@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>View All Spaces</title>
     <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
   </head>
+
   <body>
+
     <header>
-      <a href="/spaces" class="logo">Chuckle Hotel</a>
+
+      <a href="/">
+        <img src="../images/newlogo.png" class='logo'/> 
+      </a>
 
       <div class="header-right">
         <a class="active" href="/spaces">Spaces</a>
@@ -44,7 +50,7 @@
 
     <main>
 
-      <div>
+      <div class=''>
         <% @spaces.each do |space| %>
           <a class="space" href="/spaces/<%= space.id %>">
             <h2><%= space.name %></h2>
@@ -56,4 +62,5 @@
     </main>
 
   </body>
+
 </html>
