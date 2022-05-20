@@ -40,8 +40,10 @@ class ChuckleHotel < Sinatra::Base
   end
   
   post '/users' do
-    User.create(username: params[:username], email: params[:email], password: params[:password]) 
-    redirect '/users/confirmation'
+    user = User.create(username: params[:username], email: params[:email], password: params[:password]) 
+    session[:user_id] = user.id
+    flash[:notice] = 'Thanks for signing up to Chuckle Hotel'
+    redirect '/spaces'
   end
 
   get '/users/confirmation' do

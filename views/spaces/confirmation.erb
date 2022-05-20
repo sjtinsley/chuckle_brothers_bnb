@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Thank for adding your space!</title>
-    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+    <title>Space Created Confirmation</title>
+    <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
   </head>
   <body>
-  Thank you for adding <%= @space.name %> to Chuckle Hotel
+    <header>
+      <a href="/spaces" class="logo">Chuckle Hotel</a>
+
+      <div class="header-right">
+        <a href="/spaces">Spaces</a>
+        <a class="active" href="/host">Host</a>
+
+        <% if !session[:user_id] %>
+          <a href="/users/new">Sign up</a>
+          <a href="/sessions/new">Log in</a>
+        <% end %>
+        
+      </div>
+    </header>
+
+    <% if session[:user_id] %>
+      <div class="user">
+        <div class="nav">
+          <h2>
+            Hi <%= User.find(id: session[:user_id]).username %>
+          </h2>
+
+          <div>
+            <form action='/sessions/destroy' method='post'>
+                <input type='submit' value='Log Out'>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <main>
+      Thanks for adding <%= @space.name %> to Chuckle Hotel
+    </main>
   </body>
 </html>

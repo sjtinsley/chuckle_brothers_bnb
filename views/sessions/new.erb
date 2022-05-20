@@ -2,17 +2,37 @@
 <html>
   <head>
     <title>Sign In</title>
-    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+    <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
   </head>
   <body>
-    <h2>
-      <%= flash[:notice] %>
-    </h2>
+    <header>
+      <a href="/spaces" class="logo">Chuckle Hotel</a>
 
-    <form action='/sessions' method='post'>
-      <input type='text' name='email' placeholder='Email address' required>
-      <input type='password' name='password' placeholder='Password' required>
-      <input type='submit' name='Log In'>
-    </form>
+      <div class="header-right">
+        <a href="/spaces">Spaces</a>
+        <a href="/host">Host</a>
+
+        <% if !session[:user_id] %>
+          <a href="/users/new">Sign up</a>
+          <a class="active" href="/sessions/new">Log in</a>
+        <% end %>
+        
+      </div>
+    </header>
+
+    <main class="center">
+      <h2>
+        Log In
+      </h2>
+      <% if flash[:notice] %>
+        <h3 class="flash"><%= flash[:notice] %></h3>
+      <% end %>
+
+      <form class="column" action='/sessions' method='post'>
+        <input type='text' name='email' placeholder='Email address' required>
+        <input type='password' name='password' placeholder='Password' required>
+        <input type='submit' value='Log In'>
+      </form>
+    </main>
   </body>
 </html>
