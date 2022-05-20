@@ -4,7 +4,15 @@ require_relative '../app'
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'rack_session_access/capybara'
+require 'rack_session_access'
+
+
 Capybara.app = ChuckleHotel
+
+ChuckleHotel.configure do |app|
+  app.use RackSessionAccess::Middleware
+end
 
 def empty_test_db
   DatabaseConnection.setup.query("TRUNCATE spaces, users, booking_requests, available_dates;")

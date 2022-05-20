@@ -104,8 +104,27 @@ class ChuckleHotel < Sinatra::Base
     erb :'host/index'
   end
 
-  post '/requests' do
-    
+  post '/requests/approve' do
+    request = BookingRequest.approve(id: params[:request_option])
+    session[:last_request] = params[:request_option]
+    redirect '/host/approved'
+  end
+
+  post '/requests/reject' do
+    request = BookingRequest.reject(id: params[:request_option])
+    session[:last_request] = params[:request_option]
+    redirect '/host/rejected'
+  end
+
+  get '/host/approved' do
+    p session[:last_request]
+    @space = Space.find(id: BookingRequest.find(id: session[:last_request]).space_id)
+    erb :'host/approved'
+  end
+
+  get '/host/rejected' do
+    @space = Space.find(id: BookingRequest.find(id: session[:last_request]).space_id)
+    erb :'host/rejected'
   end
 
   run! if app_file == $0

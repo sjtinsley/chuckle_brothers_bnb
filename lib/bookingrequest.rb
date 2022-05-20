@@ -36,7 +36,7 @@ class BookingRequest
     )
   end
 
-  def approve(id:)
+  def self.approve(id:)
     result = DatabaseConnection.setup.query("UPDATE booking_requests SET approved = true WHERE id = $1 RETURNING id, space_id, date, guest_id, approved;",
     [id])
 
@@ -49,7 +49,7 @@ class BookingRequest
     )
   end
 
-  def reject(id:)
+  def self.reject(id:)
     result = DatabaseConnection.setup.query("UPDATE booking_requests SET approved = false WHERE id = $1 RETURNING id, space_id, date, guest_id, approved;",
     [id])
 

@@ -1,5 +1,7 @@
-<form method="post" action="/requests">
+<form method="post" action="/requests/approve">
   <% @booking_requests.each do |request| %>
-    <input class="option" type="radio" name="<%= Space.find(id: request.space_id).name %>" value="<%= request.id %>">
+    <input class="option" type="radio" name="request_option" value="<%= request.id %>"> <label for"<%= request.id %>"><%= Space.find(id: request.space_id).name %></label>
+    <button type="submit" value="Approve">Approve</button>
+    <button type="submit" formaction="/requests/reject">Reject</button>
   <% end %>
 </form>
