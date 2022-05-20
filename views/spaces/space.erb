@@ -1,9 +1,56 @@
-<h1><%= @space.name %></h1>
-<h2><%= @space.description %></h2>
-<h3><%= @space.price %></h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>View and Book Space</title>
+    <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <a href="/spaces" class="logo">Chuckle Hotel</a>
 
-<form method="post" action="/booking">
-  <input type="hidden" name="space_id" value="<%= @space.id %>">
-  <input type="date" name="date">
-  <input type="submit" value="Request Booking">
-</form>
+      <div class="header-right">
+        <a class="active" href="/spaces">Spaces</a>
+        <a href="/host">Host</a>
+
+        <% if !session[:user_id] %>
+          <a href="/users/new">Sign up</a>
+          <a href="/sessions/new">Log in</a>
+        <% end %>
+        
+      </div>
+    </header>
+
+        <% if session[:user_id] %>
+      <div class="user">
+        <div class="nav">
+          <h2>
+            Hi <%= User.find(id: session[:user_id]).username %>, this looks like a nice space, maybe you should request a booking?
+          </h2>
+
+          <div>
+            <form action='/sessions/destroy' method='post'>
+                <input type='submit' value='Log Out'>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <main>
+
+      <div class="center">
+        <h2><%= @space.name %></h2>
+        <h3><%= @space.description %></h3>
+        <h3>£<%= @space.price %></h3>
+
+        <form method="post" action="/booking">
+          <input type="hidden" name="space_id" value="<%= @space.id %>">
+          <input type="date" name="date" required>
+          <input type="submit" value="Request Booking">
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
+
+

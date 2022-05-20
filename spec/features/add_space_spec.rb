@@ -19,7 +19,7 @@ feature 'add space' do
 
     click_button 'Create Space'
 
-    expect(page).to have_content 'Thank you for adding Testname to Chuckle Hotel'
+    expect(page).to have_content 'Thanks for adding Testname to Chuckle Hotel'
   end
 
 end

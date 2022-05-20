@@ -16,7 +16,7 @@ feature 'create booking request' do
     visit '/spaces'
     first('.space').click
 
-    fill_in 'date', with: '2022-05-17'
+    fill_in 'date', with: '2022-05-21'
     click_button 'Request Booking'
 
     expect(page).to have_content "Thank you for requesting to book space name, the host will respond within 24 hours"
