@@ -1,5 +1,5 @@
 <form method="post" action="/requests">
   <% @booking_requests.each do |request| %>
-    <input type="radio" name="<%= Space.find(request.space_id).name %>" value="<%= request.id %>">
+    <input class="option" type="radio" name="<%= Space.find(id: request.space_id).name %>" value="<%= request.id %>">
   <% end %>
 </form>

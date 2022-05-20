@@ -10,7 +10,7 @@ feature 'Responding to booking requests' do
     
     visit '/host/requests'
 
-    choose(option: '1')
+    choose('space name')
     click_button 'Approve'
     expect(page).to have_content 'Approved booking #1 for space name'
   end
@@ -20,7 +20,7 @@ feature 'Responding to booking requests' do
     
     visit '/host/requests'
 
-    choose(option: '1')
+    choose(option: 'space name')
     click_button 'Reject'
     expect(page).to have_content 'Rejected booking #1 for space name'
   end

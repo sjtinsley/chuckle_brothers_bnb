@@ -55,6 +55,7 @@ class ChuckleHotel < Sinatra::Base
 
   get '/spaces/:id' do 
     @space = Space.find(id: params[:id])
+    @guest_id = session[:user_id]
     erb :'spaces/space'
   end 
 
@@ -104,7 +105,7 @@ class ChuckleHotel < Sinatra::Base
   end
 
   post '/requests' do
-   
+    
   end
 
   run! if app_file == $0
