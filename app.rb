@@ -90,6 +90,11 @@ class ChuckleHotel < Sinatra::Base
     redirect '/'
   end
 
+  get '/host/requests' do
+    @booking_requests = BookingRequest.all_for_user(id: session[:user_id])
+    erb :'host/requests'
+  end
+
   # get '/host/spaces' do
   #   erb :'host/spaces'
   # end

@@ -61,4 +61,17 @@ class BookingRequest
       approved: result[0]['approved']
     )
   end
+
+  def self.all_for_user(id:)
+    spaces = DatabaseConnection.setup.query("SELECT * FROM spaces WHERE user_id = $1;",
+      [id])
+
+    host_space_ids = []
+    
+    spaces.map do |space|
+      host_space_ids << space['id']
+    end
+
+    host_space_ids.map |space|
+  end
 end

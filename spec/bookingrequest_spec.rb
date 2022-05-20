@@ -34,4 +34,24 @@ describe BookingRequest do
       expect(rejected_booking_request.approved).to eq 'f'
     end
   end
+
+  describe '.all_for_user' do
+    it 'should return all booking requests for the logged in host user' do
+      DatabaseConnection.setup.query("INSERT INTO users (id, username, email, password)
+      VALUES($1, $2, $3, $4);", 
+      [2, 'username2', 'email2', 'encrypted_pass2'])
+
+      DatabaseConnection.setup.query("INSERT INTO spaces (id, name, description, price, user_id)
+      VALUES($1, $2, $3, $4, $5);", 
+      [1, 'spacename', 'description', 5, 2])
+
+      booking_request = BookingRequest.create(space_id: 1, date: '2022-05-17', guest_id: 1)
+
+      space = Space.find(id: booking_request.space_id)
+
+      host_booking_requests = BookingRequest.all_for_user(id: space.user_id)
+
+      expect(host_booking_requests.first.id).to eq booking_request.id
+    end
+  end
 end
