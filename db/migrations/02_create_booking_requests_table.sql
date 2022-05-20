@@ -1,1 +1,0 @@
-CREATE TABLE booking_requests (id SERIAL PRIMARY KEY, space_id NUMERIC NOT NULL, date DATE NOT NULL);

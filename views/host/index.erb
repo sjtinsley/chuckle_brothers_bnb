@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <title>Space Created Confirmation</title>
+    <title> Welcome our lovely host! </title>
     <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
   </head>
 
@@ -15,8 +14,8 @@
       </a>
 
       <div class="header-right">
-        <a href="/spaces">Spaces</a>
-        <a class="active" href="/host">Host</a>
+        <a class="active" href="/spaces">Spaces</a>
+        <a href="/host">Host</a>
 
         <% if !session[:user_id] %>
           <a href="/users/new">Sign up</a>
@@ -31,7 +30,7 @@
       <div class="user">
         <div class="nav">
           <h2>
-            Hi <%= User.find(id: session[:user_id]).username %>
+            Hi <%= User.find(id: session[:user_id]).username %>, thanks for being a host!
           </h2>
 
           <div>
@@ -44,7 +43,22 @@
     <% end %>
 
     <main>
-      Thanks for adding <%= @space.name %> to Chuckle Hotel
+    
+    <div class='form'>
+      <form action='/spaces/new' method='get'>
+        <input type='submit' value='Create Space'>
+      </form>
+    
+      <form action='/host/requests' method='get'>
+        <input type='submit' value='View Requests' required>
+      </form>
+
+              
+      <form action='/host/spaces' method='get'>
+        <input type='submit' value='Update Availability'>
+      </form>
+    </div>
+
     </main>
 
   </body>

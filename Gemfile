@@ -8,6 +8,8 @@ gem 'pg'
 gem 'rerun'
 gem 'sinatra-flash'
 gem 'bcrypt'
+gem 'rack_session_access'
+
 
 
 group :test do

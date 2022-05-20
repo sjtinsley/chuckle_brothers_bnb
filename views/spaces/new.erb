@@ -1,15 +1,72 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <title>Hello!</title>
-    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+    <title>Create New Space</title>
+    <link rel="stylesheet" href="../css/stylesheet.css" type="text/css" />
   </head>
+
   <body>
-    <form action='/spaces' method='post'>
-      <input type='text' name='name' placeholder='Space name' required>
-      <input type='text' name='description' placeholder='Space description' required>
-      <input type='number' name='price' placeholder='Space cost per night' required>
-      <input type='submit' name='Create Space'>
-    </form>
+
+    <header>
+
+      <a href="/">
+        <img src="../images/newlogo.png" class='logo'/> 
+      </a>
+
+      <div class="header-right">
+        <a href="/spaces">Spaces</a>
+        <a class="active" href="/host">Host</a>
+
+        <% if !session[:user_id] %>
+          <a href="/users/new">Sign up</a>
+          <a href="/sessions/new">Log in</a>
+        <% end %>
+        
+      </div>
+
+    </header>
+
+    <% if session[:user_id] %>
+      <div class="user">
+        <div class="nav">
+          <h2>
+            Hi <%= User.find(id: session[:user_id]).username %>, host a new space by filling in the form below
+          </h2>
+
+          <div>
+            <form action='/sessions/destroy' method='post'>
+                <input type='submit' value='Log Out'>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <main>
+      <div class="center">
+        <h2>
+          Enter new space details
+        </h2>
+      </div>
+
+      <form class="center" action='/spaces' method='post'>
+
+        <input type='text' name='name' placeholder='Space name' required><br>
+        <input type='text' name='description' placeholder='Space description' required><br>
+        <input type='number' name='price' placeholder='Space cost per night' required><br>
+        <input type='hidden' name='user_id' value="<%= @user.id %>">
+        
+        <label for="available_from">Available from:</label><br>
+        <input type='date' name='available_from' required><br>
+        <label for="available_to">Available to:</label><br>
+        <input type='date' name='available_to' required><br>
+
+        <input type='submit' value='Create Space'>
+      </form>
+
+    </main>
+
   </body>
+
 </html>

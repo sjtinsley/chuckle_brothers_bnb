@@ -1,0 +1,30 @@
+
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Thank you for confirming the request!</title>
+   <link rel="stylesheet" href="../../css/stylesheet.css" type="text/css" />
+  </head>
+  <body>
+
+    <header>
+      <a href="/spaces">
+        <img src="../../images/newlogo.png" class='logo'/>
+      </a>
+    </header>
+
+  <body>
+
+    <form method="post" action="/requests/approve">
+      <% @booking_requests.each do |request| %>
+        <input class="option" type="radio" name="request_option" value="<%= request.id %>"> <label for"<%= request.id %>"><%= Space.find(id: request.space_id).name %></label><br>
+      <% end %>
+      <button type="submit" value="Approve">Approve</button><br>
+      <button type="submit" formaction="/requests/reject">Reject</button><br>
+    </form>
+
+  </body>
+
+</html>
