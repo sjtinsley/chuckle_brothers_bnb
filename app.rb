@@ -103,5 +103,9 @@ class ChuckleHotel < Sinatra::Base
     erb :'host/index'
   end
 
+  post '/requests' do
+   
+  end
+
   run! if app_file == $0
 end

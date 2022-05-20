@@ -63,15 +63,23 @@ class BookingRequest
   end
 
   def self.all_for_user(id:)
-    spaces = DatabaseConnection.setup.query("SELECT * FROM spaces WHERE user_id = $1;",
+    booking_requests = DatabaseConnection.setup.query("SELECT booking_requests.id,
+      booking_requests.space_id,
+      booking_requests.date,
+      booking_requests.guest_id,
+      booking_requests.approved
+           FROM booking_requests JOIN spaces
+             ON booking_requests.space_id = spaces.id
+              WHERE spaces.user_id = $1;",
       [id])
-
-    host_space_ids = []
+      
+     host_requests = []
     
-    spaces.map do |space|
-      host_space_ids << space['id']
+    booking_requests.map do |request|
+      host_requests << BookingRequest.new(id: request['id'], space_id: request['space_id'], date: request['date'], guest_id: request['guest_id'], approved: request['approved'])
     end
 
-    host_space_ids.map |space|
+    host_requests
+    
   end
 end
