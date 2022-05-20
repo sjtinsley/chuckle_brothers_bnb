@@ -55,6 +55,7 @@ class ChuckleHotel < Sinatra::Base
     @user = User.all.last
     erb :'users/confirmation'
   end
+  
   post '/spaces' do
     Space.create(name: params[:name], description: params[:description], price: params[:price]) 
     redirect '/spaces/confirmation'
@@ -63,6 +64,7 @@ class ChuckleHotel < Sinatra::Base
   get '/spaces/:id' do 
     if session[:user_id]
       @space = Space.find(id: params[:id])
+      @guest_id = session[:user_id]
       erb :'spaces/space'
     else
       flash[:notice] = 'You must be logged in to view a space'
@@ -71,7 +73,7 @@ class ChuckleHotel < Sinatra::Base
   end 
 
   post '/booking' do
-    booking_request = BookingRequest.create(date: params[:date], space_id: params[:space_id])
+    booking_request = BookingRequest.create(date: params[:date], space_id: params[:space_id], guest_id: session[:user_id])
     redirect "/booking/#{booking_request.id}/confirmation"
   end
 
@@ -102,11 +104,37 @@ class ChuckleHotel < Sinatra::Base
     redirect '/'
   end
 
-  # Request for updating availability spec
-  # get '/host/spaces' do
-  #   @spaces = Space.all
-  #   erb :'host/spaces'
-  # end
+  get '/host/requests' do
+    @booking_requests = BookingRequest.all_for_user(id: session[:user_id])
+    erb :'host/requests'
+  end
+  
+
+  get '/host/spaces' do
+    erb :'host/index'
+  end
+
+  post '/requests/approve' do
+    request = BookingRequest.approve(id: params[:request_option])
+    session[:last_request] = params[:request_option]
+    redirect '/host/approved'
+  end
+
+  post '/requests/reject' do
+    request = BookingRequest.reject(id: params[:request_option])
+    session[:last_request] = params[:request_option]
+    redirect '/host/rejected'
+  end
+
+  get '/host/approved' do
+    p session[:last_request]
+    @space = Space.find(id: BookingRequest.find(id: session[:last_request]).space_id)
+    erb :'host/approved'
+  end
+
+  get '/host/rejected' do
+    @space = Space.find(id: BookingRequest.find(id: session[:last_request]).space_id)
+    erb :'host/rejected'
 
   get '/host' do
     if session[:user_id]

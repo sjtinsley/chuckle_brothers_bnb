@@ -7,8 +7,7 @@ describe User do
     end
 
     it 'hashes the password using BCrypt' do
-      expect(BCrypt::Password).to receive(:create).with('password123').and_return('password123')
-
+      expect(BCrypt::Password).to receive(:create).with('password123').and_return('hello')
       User.create(username: 'test', email: 'test@example.com', password: 'password123')
     end
 
