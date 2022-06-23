@@ -63,8 +63,8 @@ First engineering group project during Week 5 of the Makers hybrid course, we we
 - [Rubocop](https://rubocop.org/) for linting.
 - [Rspec](https://rspec.info/) for testing our backend code.
 - [CSS](https://www.w3.org/Style/CSS/Overview.en.html) for styling of the webpages.
-- [Balsamiq]()
-- [Trello]()
+- [Balsamiq](https://balsamiq.cloud/) for wireframing.
+- [Trello](https://trello.com/en) for assigning tickets within the team.
 
 ## How to run locally
 -------
